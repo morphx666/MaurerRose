@@ -6,12 +6,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaurerRose {
     public partial class FormMain : Form {
         private DirectBitmap dbmp;
+        private double angleStep = 1.0;
 
         public FormMain() {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace MaurerRose {
 
                 Task.Run(() => {
                     while(true) {
-                        Task.Delay(30);
+                        Thread.Sleep(30);
                         this.Invalidate();
                     }
                 });
@@ -47,8 +49,8 @@ namespace MaurerRose {
         }
 
         private void BuildRose() {
-            int n = 6;
-            int d = 71;
+            int n = 5;
+            int d = 97;
 
             int m = 4;
 
@@ -56,18 +58,18 @@ namespace MaurerRose {
             double h = dbmp.Height / 2;
             double r = Math.Min(w, h) - m;
 
-            Point[] p = new Point[361];
+            List<Point> p = new List<Point>();
 
-            for(int a = 0; a < 361.0; a += 1) {
+            for(double a = 0; a <= 360.0; a += angleStep) {
                 double k = a * DirectBitmapExtensions.ToRad * d;
                 double r1 = r * Math.Sin(n * k);
 
                 double x = w + r1 * Math.Cos(k);
                 double y = h - r1 * Math.Sin(k);
-                p[a] = new Point((int)x, (int)y);
+                p.Add(new Point((int)x, (int)y));
             }
 
-            dbmp.DrawPolygon(Color.DimGray, p);
+            dbmp.DrawPolygon(Color.DimGray, p.ToArray());
         }
     }
 }
