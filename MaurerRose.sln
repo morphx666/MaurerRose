@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaurerRose", "MaurerRose\MaurerRose.csproj", "{F7843057-47AA-415A-9F32-AE0130C52F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaurerRose", "MaurerRose\MaurerRose.csproj", "{F7843057-47AA-415A-9F32-AE0130C52F8E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MorphxLibs", "MorphxLibs\MorphxLibs.shproj", "{F92EE134-8CB3-455A-9160-841004898E8D}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		MorphxLibs\MorphxLibs.projitems*{f7843057-47aa-415a-9f32-ae0130c52f8e}*SharedItemsImports = 5
+		MorphxLibs\MorphxLibs.projitems*{f92ee134-8cb3-455a-9160-841004898e8d}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

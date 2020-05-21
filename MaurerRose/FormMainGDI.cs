@@ -1,4 +1,4 @@
-﻿using DirectBitmapLib;
+﻿using MorphxLibs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,24 +8,21 @@ using System.Windows.Forms;
 
 namespace MaurerRose {
     public partial class FormMainGDI : Form {
-        double angle;
-        double angleStep = 1.0;
-        List<Point> points = new List<Point>();
-        Pen p = new Pen(Color.DimGray, 2);
+        private double angle;
+        private List<Point> points = new List<Point>();
+        private Pen p = new Pen(Color.DimGray, 2);
 
-        int n = 6;
-        int d = 71;
+        private double angleStep = 1.0;
+        private int n = 6;
+        private int d = 71;
+        private int m = 4; // Margin
 
         public FormMainGDI() {
             InitializeComponent();
 
-            this.Text = "Maurer Rose";
-            this.Size = new Size(800, 800);
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | 
+                          ControlStyles.OptimizedDoubleBuffer | 
+                          ControlStyles.UserPaint, true);
 
             this.Load += (s, e) => {
                 Reset();
@@ -35,15 +32,13 @@ namespace MaurerRose {
                 this.KeyDown += HandleKeyDown;
 
                 Task.Run(() => {
-                    int m = 4; // Margin
-
                     while(true) {
                         double w = this.DisplayRectangle.Width / 2;
                         double h = this.DisplayRectangle.Height / 2;
                         double r = Math.Min(w, h) - m;
 
                         while((angle += angleStep) <= 360.0) {
-                            double k = angle * DirectBitmapExtensions.ToRad * d;
+                            double k = angle * Constants.ToRad * d;
                             double r1 = r * Math.Sin(n * k);
 
                             double x = w + r1 * Math.Cos(k);
@@ -66,7 +61,7 @@ namespace MaurerRose {
                     angleStep += 0.5 * (e.Shift ? -1 : 1);
                     if(angleStep < 0.0)
                         angleStep = 0;
-                    else if(angleStep > 90.0) 
+                    else if(angleStep > 90.0)
                         angleStep = 90.0;
                     Reset();
                     break;
@@ -92,9 +87,9 @@ namespace MaurerRose {
             if(points.Count > 1) g.DrawPolygon(p, points.ToArray());
 
             int fh = this.Font.Height;
-            g.DrawString($"Angle Step: {angleStep:F2}", this.Font, Brushes.DimGray, 0, fh * 0);
-            g.DrawString($"n: {n}", this.Font, Brushes.DimGray, 0, fh * 1);
-            g.DrawString($"d: {d}", this.Font, Brushes.DimGray, 0, fh * 2);
+            g.DrawString($"Angle Step: {angleStep:F2}", this.Font, Brushes.Black, 0, fh * 0);
+            g.DrawString($"n: {n}", this.Font, Brushes.Black, 0, fh * 1);
+            g.DrawString($"d: {d}", this.Font, Brushes.Black, 0, fh * 2);
         }
     }
 }

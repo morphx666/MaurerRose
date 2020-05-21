@@ -4,17 +4,19 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyVersion>2019.10.27.131</AssemblyVersion>
-    <FileVersion>2019.10.27.131</FileVersion>
+    <AssemblyVersion>2020.5.142.140</AssemblyVersion>
+    <FileVersion>2020.5.142.140</FileVersion>
     <StartupObject>MaurerRose.Program</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +24,7 @@
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
+
+  <Import Project="..\MorphxLibs\MorphxLibs.projitems" Label="Shared" />
 
 </Project>
